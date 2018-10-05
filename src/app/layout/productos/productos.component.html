@@ -1,5 +1,7 @@
-<h3 class="text-muted">Productos</h3>
-<p-dataTable [value]="products" 
+
+
+ <h3 class="text-muted">Productos</h3>
+<p-dataTable [value]="products"
             selectionMode="single"
             [(selection)]="selectedProducto"
             [immutable]="false"
@@ -7,10 +9,52 @@
             emptyMessage="No hay Productos"
             scrollable="true" scrollHeight="500px"
             [rows]="15">
-    <p-column field="nombre" header="Lista de Productos"></p-column>
+    <p-column [style]="{'width':'85%'}" field="name" header="Nombre"></p-column>
+
+    <p-column [style]="{'width':'9%'}"  field="icon" header="Icono" >
+        <ng-template let-col let-product="rowData" pTemplate="body">
+            <img src="{{product[col.field]}}">
+        </ng-template>
+    </p-column>
+
+
+
+
+
 </p-dataTable>
 
+
+
 <br/>
+
+ <!--
+ <p-column field=<img src="icon"> header="Icono"></p-column>
+ <p-column field=<img src="icon"> header="Logo" [filter]="true" filterMatchMode="contains" [sortable]="true"></p-column>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Icono</th>
+        <th scope="col">Edito?</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let product of products" (click)='select(product)'>
+
+
+        <p (click)='select(product)'>
+        <td>{{product.name}} </td>
+        </p>
+        <td> <img src="{{product.icon}}" alt="aaa" width="68" height="68" /></td>
+        <td>  aaa</td>
+
+
+    </tr>
+
+    </tbody>
+</table>
+-->
 
 Edit component
 <div>
@@ -19,4 +63,4 @@ Edit component
   [productOriginal] = "productSelected"
   (productUpdated) = "OnEdit($event)"
   ></app-product-edit>
-</div> 
+</div>
