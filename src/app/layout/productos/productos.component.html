@@ -1,0 +1,22 @@
+<h3 class="text-muted">Productos</h3>
+<p-dataTable [value]="products" 
+            selectionMode="single"
+            [(selection)]="selectedProducto"
+            [immutable]="false"
+            expandableRows="true"
+            emptyMessage="No hay Productos"
+            scrollable="true" scrollHeight="500px"
+            [rows]="15">
+    <p-column field="nombre" header="Lista de Productos"></p-column>
+</p-dataTable>
+
+<br/>
+
+Edit component
+<div>
+  <app-product-edit
+  *ngIf = "productSelected"
+  [productOriginal] = "productSelected"
+  (productUpdated) = "OnEdit($event)"
+  ></app-product-edit>
+</div> 

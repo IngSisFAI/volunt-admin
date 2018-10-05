@@ -1,0 +1,30 @@
+<div>
+    <h2>Product Add</h2>
+
+    <!-- Example of use
+    <div>
+      <label>ID: </label>
+      <input type="text" [(ngModel)]='Product.id' placeholder="1">
+    </div> -->
+
+    <button (click)='create()'>Save</button>
+  </div>
+
+<div *ngIf="product" class="row">
+  <div class="col-md-12">
+    <h2 *ngIf="product._id">Contact Details</h2>
+    <h2 *ngIf="!product._id">New Contact</h2>
+  </div>
+</div>
+
+<div *ngIf="product" class="row">
+  <form class="col-md-12">
+    <div class="form-group">
+      <label for="product-name">Name</label>
+      <input class="form-control" name="product-name" [(ngModel)]="product.name" placeholder="Name"/>
+    </div>
+
+    <button class="btn btn-primary" *ngIf="!contact._id" (click)="create()">Create</button>
+
+  </form>
+</div>
