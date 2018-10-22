@@ -1,66 +1,86 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="text-muted">Productos</h3>
+    </div>
 
+    <div class="panel-body">
+        <p-dataTable [value]="products"
+                    selectionMode="single"
+                    [(selection)]="productSelected"
+                    [immutable]="false"
+                    expandableRows="true"
+                    emptyMessage="No hay Productos"
+                    paginator="true"
+                    [rows]="10">
+            <p-header [style]="{'width': '100%'}">
+                <div class="ui-helper-clearfix">
+                    <div style="float:right;">
+                        <button pButton 
+                                class="ui-button-primario"
+                                id="boton" type="button"
+                                icon="fa fa-plus"
+                                label="Nuevo Producto"
+                                data-toggle="modal" 
+                                data-target="#modalAgregarProducto"
+                        ></button>
+                    </div>
+                    <div style="padding-left: 15%;"><strong>Lista de Productos</strong></div>
+                </div>
+            </p-header>
+            <p-column [style]="{'width':'85%'}" field="name" header="Nombre"></p-column>
+            <p-column [style]="{'width':'5%'}"  field="icon" header="Icono" >
+                <ng-template let-col let-product="rowData" pTemplate="body">
+                    <img src="{{product[col.field]}}" style="width: 50px">
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+    </div>
 
- <h3 class="text-muted">Productos</h3>
-<p-dataTable [value]="products"
-            selectionMode="single"
-            [(selection)]="selectedProducto"
-            [immutable]="false"
-            expandableRows="true"
-            emptyMessage="No hay Productos"
-            scrollable="true" scrollHeight="500px"
-            [rows]="15">
-    <p-column [style]="{'width':'85%'}" field="name" header="Nombre"></p-column>
+    <div class="modal-footer" style="float: right;">    <!-- Boton Editar Producto-->
+        <button
+            pButton
+            *ngIf="!productSelected"
+            disabled
+            label="Editar"
+            icon="fa fa-pencil"
+            class="ui-button-warning"
+        ></button>
+        <button
+            *ngIf="productSelected"
+            pButton
+            label="Editar"
+            icon="fa fa-pencil"
+            class="ui-button-warning"
+            data-toggle="modal"
+            data-target="#modalEditarProducto"
+        ></button>
 
-    <p-column [style]="{'width':'9%'}"  field="icon" header="Icono" >
-        <ng-template let-col let-product="rowData" pTemplate="body">
-            <img src="{{product[col.field]}}">
-        </ng-template>
-    </p-column>
-
-
-
-
-
-</p-dataTable>
-
-
-
-<br/>
-
- <!--
- <p-column field=<img src="icon"> header="Icono"></p-column>
- <p-column field=<img src="icon"> header="Logo" [filter]="true" filterMatchMode="contains" [sortable]="true"></p-column>
-
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th scope="col">Nombre</th>
-        <th scope="col">Icono</th>
-        <th scope="col">Edito?</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let product of products" (click)='select(product)'>
-
-
-        <p (click)='select(product)'>
-        <td>{{product.name}} </td>
-        </p>
-        <td> <img src="{{product.icon}}" alt="aaa" width="68" height="68" /></td>
-        <td>  aaa</td>
-
-
-    </tr>
-
-    </tbody>
-</table>
--->
-
-Edit component
-<div>
-  <app-product-edit
-  *ngIf = "productSelected"
-  [productOriginal] = "productSelected"
-  (productUpdated) = "OnEdit($event)"
-  ></app-product-edit>
+        <!-- Boton Eliminar Producto-->
+        <button
+            pButton
+            *ngIf="!productSelected"
+            disabled
+            label="Eliminar"
+            icon="fa fa-times"
+            class="ui-button-danger"
+        ></button>
+        <button
+            *ngIf="productSelected"
+            pButton
+            label="Eliminar"
+            icon="fa fa-times"
+            class="ui-button-danger"
+            (click)="eliminarProducto()"
+        ></button>
+    </div>
 </div>
+
+<app-product-add
+    (nuevoProducto)="onAddProducto($event)"
+></app-product-add>
+
+<app-product-edit
+    *ngIf = "productSelected"
+    [productOriginal] = "productSelected"
+    (productUpdated) = "onUpdateProducto($event)"
+></app-product-edit>

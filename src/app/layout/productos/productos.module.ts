@@ -23,6 +23,7 @@ import { SharedModule, ButtonModule, PanelModule } from 'primeng/primeng';
 import { DataTableModule } from 'primeng/primeng';
 import { TableModule } from 'primeng/components/table/table';
 import { DropdownModule } from 'primeng/dropdown';
+import {InputTextModule} from 'primeng/inputtext';
 
 @NgModule({
     imports: [
@@ -37,7 +38,8 @@ import { DropdownModule } from 'primeng/dropdown';
         PanelModule,
         DataTableModule,
         TableModule,
-        DropdownModule
+        DropdownModule,
+        InputTextModule
     ],
     declarations: [ProductosComponent, ProductAddComponent, ProductEditComponent],
     providers: [ProductApi, SocketConnection, SocketDriver, SDKModels, LoopBackAuth, InternalStorage]

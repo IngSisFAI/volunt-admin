@@ -1,11 +1,46 @@
-<div>
-  <h2>Editar Product</h2>
+<!-- Modal de Editar Producto -->
+<div class="modal fade"  id="modalEditarProducto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h3 class="modal-title" id="myModalLabel">Editar Producto</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true" #closeBtnAgregarCertificado>&times;</button>
+          </div>
 
-  <div>
-    <label>Nombre: </label>
-    <input type="text" [(ngModel)]='product.name' placeholder="{{product.name}}">
+          <div class="modal-body">
+            <div>
+              <h5>Nombre: </h5>
+              <input type="text" class="form-control" size="30" [(ngModel)]='productOriginal.name' placeholder="{{productOriginal.name}}">
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button 
+              *ngIf="productOriginal.name == nombreOriginal"
+              pButton
+              disabled
+              class="ui-button-success"
+              label="Guardar"
+              icon="fa fa-check"
+            ></button>
+            <button 
+              *ngIf="productOriginal.name != nombreOriginal"
+              pButton
+              class="ui-button-success"
+              label="Guardar"
+              icon="fa fa-check"
+              (click)='update()'
+              data-dismiss="modal"
+            ></button>
+
+            <button
+              pButton
+              class="ui-button-danger"
+              label="Cancelar"
+              icon="fa fa-times"
+              data-dismiss="modal"
+            ></button>
+          </div>
+      </div>
   </div>
-
-  <button (click)='update()'>Guardar</button>
-  <button (click)='cancelar()'>Cancelar</button>
 </div>
